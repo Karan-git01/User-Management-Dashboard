@@ -1,7 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Users = () => {
+  const {theme} = useContext(ThemeContext);
+
   const [users, setUsers] = useState([]);
   const [form, setForm] = useState({
     name: "",
@@ -70,8 +73,8 @@ const Users = () => {
 
   return (
     <div>
-      <div className="w-full min-h-screen bg-blue-300 flex justify-center items-center">
-        <div className=" bg-blue-300 w-full max-w-[1200px] flex flex-col justify-center items-center p-6">
+      <div className={`w-full ${theme === "light" ? "bg-blue-300" : "bg-slate-900 text-white"} min-h-screen bg-blue-300 flex justify-center items-center`}>
+        <div className="  w-full max-w-[1200px] flex flex-col justify-center items-center p-6">
           {/* Heading */}
           <h2 className=" text-center text-3xl font-bold underline mb-6">
             Users Management
@@ -79,9 +82,9 @@ const Users = () => {
 
           {/* FORM */}
           <div className=" ">
-            <form className="w-[700px] bg-white p-6 rounded-2xl shadow-lg space-y-5 border ">
+            <form className={`w-[700px] ${theme === "light" ? "bg-white" : "bg-slate-800 text-white"} p-6 rounded-2xl shadow-lg space-y-5 border `}>
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                <label className={`block ${theme === "light" ? "bg-white" : "bg-slate-800 text-white"} text-sm font-semibold text-gray-700 mb-1`}>
                   Name
                 </label>
                 <input
@@ -95,7 +98,7 @@ const Users = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                <label className={`block ${theme === "light" ? "bg-white" : "bg-slate-800 text-white"} text-sm font-semibold text-gray-700 mb-1`}>
                   Email
                 </label>
                 <input
@@ -109,7 +112,7 @@ const Users = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                <label className={`block ${theme === "light" ? "bg-white" : "bg-slate-800 text-white"} text-sm font-semibold text-gray-700 mb-1`}>
                   Address
                 </label>
                 <input
@@ -123,7 +126,7 @@ const Users = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-1">
+                <label className={`block ${theme === "light" ? "bg-white" : "bg-slate-800 text-white"} text-sm font-semibold text-gray-700 mb-1`}>
                   Description
                 </label>
 
@@ -156,7 +159,7 @@ const Users = () => {
             {users.map((user) => (
               <div
                 key={user.id}
-                className=" bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 p-5 border"
+                className={`rounded-2xl ${theme === "light" ? "bg-white" : "bg-slate-800 text-white"} shadow-md hover:shadow-xl transition duration-300 p-5 border`}
               >
                 {/* Image */}
                 <img
@@ -166,16 +169,16 @@ const Users = () => {
                 />
 
                 {/* Info */}
-                <h3 className="text-lg font-semibold text-gray-800 text-center">
+                <h3 className="text-lg font-semibold text-center">
                   {user.name}
                 </h3>
-                <p className="text-sm text-gray-500 text-center">
+                <p className="text-sm text-center">
                   {user.email}
                 </p>
-                <p className="text-sm text-gray-500 text-center">
+                <p className="text-sm text-center">
                   {user.address}
                 </p>
-                <p className="text-sm text-gray-600 text-center mt-2 break-words">
+                <p className="text-sm text-center mt-2 break-words">
                   {user.description?.split(" ").slice(0, 10).join(" ")}
                 </p>
 

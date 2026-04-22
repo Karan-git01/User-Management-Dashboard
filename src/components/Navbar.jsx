@@ -1,10 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../context/ThemeContext";
 
 const Navbar = () => {
+  const{theme, toggleTheme} = useContext(ThemeContext);
+
   return (
-    <div className="bg-slate-900 w-full">
-      <nav className="max-w-[1200px] mx-auto text-gray-200 px-6 py-3 flex justify-between items-center">
+    <div
+      className={`w-full p-4 ${
+        theme === "light" ? "bg-white text-black" : "bg-black text-white"
+      }`}
+    >
+      <nav
+        className={`max-w-[1200px] mx-auto px-6 py-3 flex justify-between items-center ${theme === "light" ? " bg-white text-black" : " bg-black text-white"}`}
+      >
         <Link to="/" className="hover:text-gray-200">
           <h1 className="text-2xl font-bold tracking-wide cursor-default">
             MyApp
@@ -39,6 +48,13 @@ const Navbar = () => {
           >
             Users
           </Link>
+
+          <button
+            onClick={toggleTheme}
+            className=" px-3 py-1 border rounded whitespace-nowrap hover:bg-blue-500 transition "
+          >
+            Toggle Theme
+          </button>
         </div>
       </nav>
     </div>
